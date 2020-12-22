@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
 import Layout from '../../components/layout';
 import { Space } from '../../components/grid';
+import { ButtonFilled } from '../../components/form-elements';
 import URL from '../../assets/constant/url';
 import Request from '../../utils/request';
 
@@ -12,6 +14,7 @@ export default function Home() {
     { label: 'Score', key: 'score' },
     { label: 'Time Taken', key: 'timeTaken' },
   ];
+  const history = useHistory();
 
   useEffect(() => {
     Request.get(URL.RESULT)
@@ -23,10 +26,19 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    history.push('/');
+  };
+
   return (
     <Layout>
       <Space top="20px" />
-      <h2>Welcome, checkout the latest scores</h2>
+      <div className="space-between">
+        <h2>Welcome, checkout the latest scores</h2>
+        <ButtonFilled onClick={logout}>Logout</ButtonFilled>
+      </div>
 
       <Space top="30px" />
       <table id="customers">

@@ -89,6 +89,12 @@ input {
   margin-top: 5px;
 }
 
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media (max-width: 767px) {
   .hide-sm {
     display: none;
